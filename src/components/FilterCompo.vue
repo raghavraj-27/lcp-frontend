@@ -51,8 +51,21 @@
             
         </v-card-text>
         <v-card-actions>
-          <v-btn color="primary" block @click="saveData">Save</v-btn>
+          <!-- <v-btn color="primary" block @click="saveData">Save</v-btn> -->
+          <v-row>
+            <v-col cols="4">
+              <v-btn color="primary" block @click="saveData">Submit</v-btn>
+            </v-col>
+            <v-col cols="4">
+              <!-- Add your additional buttons here -->
+              <v-btn color="primary" block @click="resetFilters">Reset</v-btn>
+            </v-col>
+            <v-col cols="4">
+              <v-btn color="primary" block @click="dialog = false">Close</v-btn>
+            </v-col>
+          </v-row>
         </v-card-actions>
+        <!-- <v-btn color="primary" block >Clear</v-btn> -->
       </v-card>
     </v-dialog>
   </div>
@@ -103,6 +116,14 @@ import TableCompo from './TableCompo.vue'
         this.sendData = true
         this.dialog = false
       },
+      resetFilters() {
+        this.type = ''
+        this.contestType = ''
+        this.acceptanceRateFrom = ''
+        this.acceptedFrom = ''
+        this.acceptedTo = ''
+        this.acceptanceRateTo = ''
+      }
     }
   }
 </script>
@@ -112,6 +133,6 @@ import TableCompo from './TableCompo.vue'
     margin-bottom: 10px;
 }
 .v-text-field, .v-select {
-  margin: 10px;
+  margin: 2px;
 }
 </style>

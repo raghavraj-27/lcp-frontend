@@ -22,7 +22,7 @@
             <v-col cols="12" sm="6">
               <v-select
                 label="Problem Type"
-                :items="['A', 'B', 'C', 'D']"
+                :items="['All', 'A', 'B', 'C', 'D']"
                 variant="solo"
                 v-model="type"
               ></v-select>
@@ -30,7 +30,7 @@
             <v-col cols="12" sm="6">
               <v-select
                 label="Contest Type"
-                :items="['Weekly', 'Biweekly']"
+                :items="['Both', 'Weekly', 'Biweekly']"
                 variant="solo"
                 v-model="contestType"
               ></v-select>
@@ -56,7 +56,7 @@
       </v-card>
     </v-dialog>
   </div>
-  <TableCompo :formData="formData" />
+  <TableCompo :formData="computedFormData" />
 </template>
 
 <script>
@@ -78,12 +78,17 @@ import TableCompo from './TableCompo.vue'
         formData: {},
       }
     },
+    computed: {
+      computedFormData() {
+        return this.formData
+      }
+    },
     methods: {
       saveData() {
         // const formdata = {}
-        if(this.type !== '' && this.type !== null && this.type !== undefined) 
+        if(this.type !== '' && this.type !== null && this.type !== undefined && this.type !== 'All') 
           this.formData.type = this.type
-        if(this.contestType !== '' && this.contestType !== null && this.contestType !== undefined) 
+        if(this.contestType !== '' && this.contestType !== null && this.contestType !== undefined && this.contestType !== 'Both') 
           this.formData.contestType = this.contestType
         if(this.acceptedFrom !== '' && this.acceptedFrom !== null && this.acceptedFrom !== undefined) 
           this.formData.acceptedFrom = parseInt(this.acceptedFrom)

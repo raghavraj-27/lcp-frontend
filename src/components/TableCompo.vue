@@ -33,12 +33,18 @@ export default {
       orignalData: [],
     };
   },
+  watch: {
+    formData: {
+      deep: true,
+      handler: 'fetchData',
+    },
+  },
   mounted() {
     this.fetchData();
   },
   methods: {
     async fetchData() {
-      console.log(this.formData);
+      console.log(this.formData)
       if(Object.keys(this.formData).length === 0) {
         try {
           const response = await fetch('https://us-central1-lcpapi.cloudfunctions.net/api/api/problem');
@@ -73,6 +79,7 @@ export default {
 <style>
 .table {
   margin: auto;
+  width: 80%;
 }
 .table tbody tr {
   height: 50px; /* Adjust as needed */

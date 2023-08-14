@@ -1,6 +1,4 @@
 <template>
-  <FilterCompo />
-  <div>
     <table class="table">
       <thead>
         <tr>
@@ -9,7 +7,7 @@
           <th>Accepted</th>
           <th>Submission</th>
           <th>Acceptance Rate</th>
-          <!-- <th>Contest Name</th> -->
+          <th>Contest Name</th>
         </tr>
       </thead>
       <tbody>
@@ -19,51 +17,53 @@
           <td class="text-center">{{ item.accepted }}</td>
           <td class="text-center">{{ item.submissions }}</td>
           <td class="text-center">{{ item.acceptanceRate }}</td>
-          <!-- <td class="text-center"><a :href="item.contestUrl" target="_blank">{{ item.contestName }}</a></td> -->
+          <td class="text-center"><a :href="item.contestUrl" target="_blank">{{ item.contestName }}</a></td>
         </tr>
       </tbody>
     </table>
-  </div>
 </template>
 
 <script>
-import FilterCompo from './FilterCompo.vue'
 
 export default {
+  props: ['formData'],
   data() {
     return {
       data: [],
-      sortAcceptedAesc: false,
-      sortAcceptedDesc: false,
       orignalData: [],
     };
-  },
-  components: {
-    FilterCompo,
   },
   mounted() {
     this.fetchData();
   },
   methods: {
     async fetchData() {
-      try {
-        const response = await fetch('https://us-central1-lcpapi.cloudfunctions.net/api/api/problem');
-        const jsonData = await response.json();
-        this.data = jsonData;
-        this.orignalData = jsonData
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    },
-    toogleAccepted() {
-      if(this.sortAcceptedDesc) {
-        this.data = this.data.sort((a, b) => b.accepted - a.accepted)
-        this.sortAcceptedDesc = false
-      } else if(this.sortAcceptedAesc) {
-        this.data = this.data.sort((a, b) => a.accepted - b.accepted)
-        this.sortAcceptedAesc = false
+      console.log(this.formData);
+      if(Object.keys(this.formData).length === 0) {
+        try {
+          const response = await fetch('https://us-central1-lcpapi.cloudfunctions.net/api/api/problem');
+          const jsonData = await response.json();
+          this.data = jsonData;
+          this.orignalData = jsonData
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
       } else {
-        this.data = this.orignalData
+        const obj = {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(this.formData),
+        }
+        try {
+          const response = await fetch('https://us-central1-lcpapi.cloudfunctions.net/api/api/problem/filter', obj)
+          const jsonData = await response.json();
+          this.data = jsonData;
+          this.orignalData = jsonData
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
       }
     }
   },

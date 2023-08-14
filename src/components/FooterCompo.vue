@@ -7,5 +7,6 @@
 <style scoped>
 footer {
     padding: 30px;
+    text-align: center;
 }
 </style>

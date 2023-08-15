@@ -1,6 +1,6 @@
 <template>
     <footer>
-        Made by Raghav Raj (raghvendraprasad5678@gmail.com)
+        <!-- Made by Raghav Raj (raghvendraprasad5678@gmail.com) -->
     </footer>
 </template>
 

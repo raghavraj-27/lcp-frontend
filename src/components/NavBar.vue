@@ -1,7 +1,7 @@
 <template>
     <nav>
         <h1>
-            LEETCODE CONTEST PRACTICE
+            LEETCODE CONTEST PRACTICER
         </h1>
     </nav>
 </template>

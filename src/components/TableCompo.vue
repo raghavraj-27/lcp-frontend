@@ -89,6 +89,10 @@ export default {
   methods: {
     async fetchData() {
       this.info = "Fetching..."
+      this.sortAccepted = 0
+      this.sortAcceptanceRate = 0
+      this.sortContestType = 0
+      this.sortSubmission = 0
       if(Object.keys(this.formData).length === 0) {
         try {
           const response = await fetch('https://us-central1-lcpapi.cloudfunctions.net/api/api/problem');
@@ -171,9 +175,27 @@ export default {
       this.sortAcceptanceRate = 0
       this.sortSubmission = 0
       if(this.sortContestType === 1) {
-        this.data = this.data.slice().sort((a, b) => b.contestName.localeCompare(a.contestName));
+        this.data = this.data.slice().sort((a, b) => {
+          const a_match = a.contestName.match(/\d+/); // Match one or more digits
+          const a_contestNumber = a_match ? parseInt(a_match[0]) : null;
+
+          const b_match = b.contestName.match(/\d+/); // Match one or more digits
+          const b_contestNumber = b_match ? parseInt(b_match[0]) : null;
+
+          return b_contestNumber - a_contestNumber;
+        });
+        // this.data = this.data.slice().sort((a, b) => b.contestName.localeCompare(a.contestName));
       } else if(this.sortContestType === 2) {
-        this.data = this.data.slice().sort((a, b) => a.contestName.localeCompare(b.contestName));
+        this.data = this.data.slice().sort((a, b) => {
+          const a_match = a.contestName.match(/\d+/); // Match one or more digits
+          const a_contestNumber = a_match ? parseInt(a_match[0]) : null;
+
+          const b_match = b.contestName.match(/\d+/); // Match one or more digits
+          const b_contestNumber = b_match ? parseInt(b_match[0]) : null;
+
+          return a_contestNumber - b_contestNumber;
+        });
+        // this.data = this.data.slice().sort((a, b) => a.contestName.localeCompare(b.contestName));
       } else {
         this.data = this.orignalData.slice()
       }

@@ -22,7 +22,7 @@
             <v-col cols="12" sm="6">
               <v-select
                 label="Problem Type"
-                :items="['All', 'A', 'B', 'C', 'D']"
+                :items="['A', 'B', 'C', 'D']"
                 variant="solo"
                 v-model="type"
               ></v-select>
@@ -30,7 +30,7 @@
             <v-col cols="12" sm="6">
               <v-select
                 label="Contest Type"
-                :items="['Both', 'Weekly', 'Biweekly']"
+                :items="['Weekly', 'Biweekly']"
                 variant="solo"
                 v-model="contestType"
               ></v-select>
@@ -100,9 +100,9 @@ import TableCompo from './TableCompo.vue'
       saveData() {
         // const formdata = {}
         if(this.type !== '' && this.type !== null && this.type !== undefined) 
-          this.formData.type = (this.type === 'All' ? '' : this.type)
+          this.formData.type = this.type
         if(this.contestType !== '' && this.contestType !== null && this.contestType !== undefined) 
-          this.formData.contestType = (this.contestType === 'Both' ? '' : this.contestType)
+          this.formData.contestType = this.contestType
         if(this.acceptedFrom !== '' && this.acceptedFrom !== null && this.acceptedFrom !== undefined) 
           this.formData.acceptedFrom = parseInt(this.acceptedFrom)
         if(this.acceptedTo !== '' && this.acceptedTo !== null && this.acceptedTo !== undefined) 

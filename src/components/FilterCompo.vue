@@ -1,5 +1,6 @@
 <!-- eslint-disable-next-line -->
 <template>
+
   <div class="text-center">
     <v-dialog
       v-model="dialog"
@@ -9,7 +10,7 @@
         <v-btn
           color="primary"
           class="filter-btn"
-           v-bind="props"
+          v-bind="props"
         >
           FILTER
         </v-btn>
@@ -51,24 +52,22 @@
             
         </v-card-text>
         <v-card-actions>
-          <!-- <v-btn color="primary" block @click="saveData">Save</v-btn> -->
           <v-row>
             <v-col cols="4">
-              <v-btn color="primary" block @click="saveData">Submit</v-btn>
+              <v-btn color="blue" block @click="saveData">Submit</v-btn>
             </v-col>
             <v-col cols="4">
-              <!-- Add your additional buttons here -->
-              <v-btn color="primary" block @click="resetFilters">Reset</v-btn>
+              <v-btn color="black" block @click="resetFilters">Reset</v-btn>
             </v-col>
             <v-col cols="4">
-              <v-btn color="primary" block @click="dialog = false">Close</v-btn>
+              <v-btn color="red" block @click="dialog = false">Close</v-btn>
             </v-col>
           </v-row>
         </v-card-actions>
-        <!-- <v-btn color="primary" block >Clear</v-btn> -->
       </v-card>
     </v-dialog>
   </div>
+  
   <TableCompo :formData="computedFormData" />
 </template>
 
@@ -112,8 +111,6 @@ import TableCompo from './TableCompo.vue'
         if(this.acceptanceRateTo !== '' && this.acceptanceRateTo !== null && this.acceptanceRateTo !== undefined) 
           this.formData.acceptanceRateTo = this.acceptanceRateTo
 
-        // this.formData = formdata
-        this.sendData = true
         this.dialog = false
       },
       resetFilters() {
@@ -123,6 +120,8 @@ import TableCompo from './TableCompo.vue'
         this.acceptedFrom = ''
         this.acceptedTo = ''
         this.acceptanceRateTo = ''
+
+        this.formData = {}
       }
     }
   }

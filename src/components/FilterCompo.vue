@@ -99,10 +99,10 @@ import TableCompo from './TableCompo.vue'
     methods: {
       saveData() {
         // const formdata = {}
-        if(this.type !== '' && this.type !== null && this.type !== undefined && this.type !== 'All') 
-          this.formData.type = this.type
-        if(this.contestType !== '' && this.contestType !== null && this.contestType !== undefined && this.contestType !== 'Both') 
-          this.formData.contestType = this.contestType
+        if(this.type !== '' && this.type !== null && this.type !== undefined) 
+          this.formData.type = (this.type === 'All' ? '' : this.type)
+        if(this.contestType !== '' && this.contestType !== null && this.contestType !== undefined) 
+          this.formData.contestType = (this.contestType === 'Both' ? '' : this.contestType)
         if(this.acceptedFrom !== '' && this.acceptedFrom !== null && this.acceptedFrom !== undefined) 
           this.formData.acceptedFrom = parseInt(this.acceptedFrom)
         if(this.acceptedTo !== '' && this.acceptedTo !== null && this.acceptedTo !== undefined) 

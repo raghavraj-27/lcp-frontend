@@ -2,6 +2,7 @@
     <table class="table">
       <thead>
         <tr>
+          <th>Problem Link</th>
           <th>Problem Name</th>
           <th>Type</th>
 
@@ -35,7 +36,8 @@
           <td colspan="6" class="text-center"> {{ info }} </td>
         </tr>
         <tr v-for="item in data" :key="item.problemName">
-          <td><a :href="item.problemUrl" target="_blank">{{ item.problemName }}</a></td>
+          <td class="text-center"><v-btn :href="item.problemUrl" target="_blank" color="blue">Open</v-btn></td>
+          <td>{{ item.problemName }}</td>
           <td class="text-center">{{ item.type }}</td>
           <td class="text-center">{{ item.accepted }}</td>
           <td class="text-center">{{ item.submissions }}</td>
@@ -204,10 +206,10 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .table {
   margin: auto;
-  width: 80%;
+  width: 100%;
 }
 .table tbody tr {
   height: 50px; /* Adjust as needed */
@@ -238,4 +240,5 @@ export default {
 .table td {
   padding: 8px; /* Adjust as needed */
 }
+
 </style>

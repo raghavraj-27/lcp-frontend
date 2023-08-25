@@ -1,74 +1,90 @@
 <!-- eslint-disable-next-line -->
 <template>
+  
 
-  <div class="text-center">
-    <v-dialog
-      v-model="dialog"
-      width="800px"
-    >
-      <template v-slot:activator="{ props }">
-        <v-btn
-          color="primary"
-          class="filter-btn"
-          v-bind="props"
-        >
-          FILTER
-        </v-btn>
-      </template>
+  <v-row class="parent">
+    
+    <v-col cols="12" md="12" sm="12" lg="12">
+        <v-row>
+          <v-col cols="12" md="6" sm="6" lg="6" class="text-left">
+            <!-- <v-text-field label="Search Problem" hide-details="auto" v-model="acceptedFrom" :width="50"></v-text-field>  -->
+          </v-col>
+          
+          <v-col cols="12" md="6" sm="6" lg="6" class="text-right">
+            <v-dialog
+            v-model="dialog"
+            width="800px"
+          >
+            <template v-slot:activator="{ props }">
+              <v-btn
+                color="primary"
+                class="filter-btn"
+                v-bind="props"
+              >
+                FILTER
+              </v-btn>
+            </template>
+        
+            <v-card>
+              <v-card-title>Filter Problems</v-card-title>
+              <v-card-text>
+                  <v-row>
+                  <v-col cols="12" sm="6">
+                    <v-select
+                      label="Problem Type"
+                      :items="['A', 'B', 'C', 'D']"
+                      variant="solo"
+                      v-model="type"
+                    ></v-select>
+                  </v-col>
+                  <v-col cols="12" sm="6">
+                    <v-select
+                      label="Contest Type"
+                      :items="['Weekly', 'Biweekly']"
+                      variant="solo"
+                      v-model="contestType"
+                    ></v-select>
+                  </v-col>
+                  <v-col cols="12" sm="6">
+                    <v-text-field label="Accepted From" hide-details="auto" v-model="acceptedFrom"></v-text-field>
+                  </v-col>
+                  <v-col cols="12" sm="6">
+                    <v-text-field label="Accepted To" hide-details="auto" v-model="acceptedTo"></v-text-field>
+                  </v-col>
+                  <v-col cols="12" sm="6">
+                    <v-text-field label="Acceptance Rate From" hide-details="auto" v-model="acceptanceRateFrom"></v-text-field>
+                  </v-col>
+                  <v-col cols="12" sm="6">
+                    <v-text-field label="Acceptance Rate To" hide-details="auto" v-model="acceptanceRateTo"></v-text-field>
+                  </v-col>
+                </v-row>
+                  
+              </v-card-text>
+              <v-card-actions>
+                <v-row>
+                  <v-col cols="4">
+                    <v-btn color="blue" block @click="saveData">Submit</v-btn>
+                  </v-col>
+                  <v-col cols="4">
+                    <v-btn color="black" block @click="resetFilters">Reset</v-btn>
+                  </v-col>
+                  <v-col cols="4">
+                    <v-btn color="red" block @click="dialog = false">Close</v-btn>
+                  </v-col>
+                </v-row>
+              </v-card-actions>
+            </v-card>
+            </v-dialog>
+          </v-col>
+        </v-row>
+    </v-col>
+    <v-col cols="12" md="12" sm="12" lg="12">
+      <TableCompo :formData="computedFormData" />
+    </v-col>
+
+  </v-row>
   
-      <v-card>
-        <v-card-title>Filter Problems</v-card-title>
-        <v-card-text>
-            <v-row>
-            <v-col cols="12" sm="6">
-              <v-select
-                label="Problem Type"
-                :items="['A', 'B', 'C', 'D']"
-                variant="solo"
-                v-model="type"
-              ></v-select>
-            </v-col>
-            <v-col cols="12" sm="6">
-              <v-select
-                label="Contest Type"
-                :items="['Weekly', 'Biweekly']"
-                variant="solo"
-                v-model="contestType"
-              ></v-select>
-            </v-col>
-            <v-col cols="12" sm="6">
-              <v-text-field label="Accepted From" hide-details="auto" v-model="acceptedFrom"></v-text-field>
-            </v-col>
-            <v-col cols="12" sm="6">
-              <v-text-field label="Accepted To" hide-details="auto" v-model="acceptedTo"></v-text-field>
-            </v-col>
-            <v-col cols="12" sm="6">
-              <v-text-field label="Acceptance Rate From" hide-details="auto" v-model="acceptanceRateFrom"></v-text-field>
-            </v-col>
-            <v-col cols="12" sm="6">
-              <v-text-field label="Acceptance Rate To" hide-details="auto" v-model="acceptanceRateTo"></v-text-field>
-            </v-col>
-          </v-row>
-            
-        </v-card-text>
-        <v-card-actions>
-          <v-row>
-            <v-col cols="4">
-              <v-btn color="blue" block @click="saveData">Submit</v-btn>
-            </v-col>
-            <v-col cols="4">
-              <v-btn color="black" block @click="resetFilters">Reset</v-btn>
-            </v-col>
-            <v-col cols="4">
-              <v-btn color="red" block @click="dialog = false">Close</v-btn>
-            </v-col>
-          </v-row>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-  </div>
   
-  <TableCompo :formData="computedFormData" />
 </template>
 
 <script>
@@ -133,5 +149,9 @@ import TableCompo from './TableCompo.vue'
 }
 .v-text-field, .v-select {
   margin: 2px;
+}
+.parent {
+  width: 90%;
+  margin: auto;
 }
 </style>
